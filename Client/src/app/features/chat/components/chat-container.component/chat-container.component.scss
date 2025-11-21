@@ -1,0 +1,12 @@
+.message {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 16px;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column; /* zmiana z row na column, żeby zawijać tekst */
+  word-wrap: break-word;  /* starsze przeglądarki */
+  overflow-wrap: break-word; /* nowoczesne przeglądarki */
+  white-space: normal;    /* pozwala na zawijanie */
+  margin-bottom: 8px;
+}

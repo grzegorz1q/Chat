@@ -1,0 +1,7 @@
+<form (ngSubmit)="sendMessage()">
+    <label>Nazwa użytkownika</label>
+    <input type="text" name="userName" [(ngModel)]="message!.userName" /><br>
+    <label>Wiadomość</label>
+    <input type="text" name="content" [(ngModel)]="message!.content" /><br>
+    <button type="submit">Wyślij</button>
+</form>
