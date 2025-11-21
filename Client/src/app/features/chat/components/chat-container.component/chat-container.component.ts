@@ -1,5 +1,5 @@
 import { Component, input} from '@angular/core';
-import { Message } from '../../../../models/message.model';
+import { Message } from '../../../../models/message/message.model';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -9,5 +9,5 @@ import { DatePipe } from '@angular/common';
   styleUrl: './chat-container.component.scss',
 })
 export class ChatContainerComponent {
-messages = input<Message[]>([]);
+  messages = input<Message[]>([]);
 }

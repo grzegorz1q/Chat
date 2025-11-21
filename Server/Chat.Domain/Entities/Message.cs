@@ -2,9 +2,16 @@
 {
     public class Message
     {
-        public int Id { get; set; }
-        public string Username { get; set; } = string.Empty;
-        public string Content { get; set; } = string.Empty;
-        public DateTime Created { get; set; } = DateTime.Now;
+        public int Id { get; private set; }
+        public string Username { get; private set; }
+        public string Content { get; private set; }
+        public DateTime Created { get; private set; }
+
+        public Message(string username, string content)
+        {
+            Username = username;
+            Content = content;
+            Created = DateTime.Now;
+        }
     }
 }

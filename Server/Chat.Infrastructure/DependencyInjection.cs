@@ -1,4 +1,5 @@
-﻿using Chat.Domain.Interfaces;
+﻿using Chat.Application.Interfaces;
+using Chat.Domain.Interfaces;
 using Chat.Infrastructure.Persistence;
 using Chat.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,8 @@ namespace Chat.Infrastructure
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IMessageRepository, MessageRepository>();
             return services;
