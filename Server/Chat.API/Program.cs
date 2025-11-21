@@ -1,5 +1,6 @@
 using Chat.Application.CQRS.Commands.CreateMessage;
 using Chat.Infrastructure;
+using Chat.Infrastructure.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.MapHub<MessageHub>("messageHub");
 
 app.UseCors("AllowOrigin");
 // Configure the HTTP request pipeline.
