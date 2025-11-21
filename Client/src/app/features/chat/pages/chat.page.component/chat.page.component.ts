@@ -22,7 +22,9 @@ export class ChatPageComponent implements OnInit {
 
   getAllMessages(){
     this.messageService.getAllMessages().subscribe({
-      next: response => this.messages.set(response),
+      next: response => {
+        this.messages.set(response);
+      },
       error: error => console.error(error)
     });
   }

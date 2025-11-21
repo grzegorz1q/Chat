@@ -9,6 +9,7 @@ namespace Chat.Application.CQRS.Commands.CreateMessage
     {
         private readonly IMessageRepository _messageRepository;
         private readonly IUnitOfWork _unitOfWork;
+        
         public CreateMessageCommandHandler(IMessageRepository messageRepository, IUnitOfWork unitOfWork)
         {
             _messageRepository = messageRepository;
