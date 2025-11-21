@@ -1,9 +1,10 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { ChatContainerComponent } from '../../components/chat-container.component/chat-container.component';
 import { SendMessageComponent } from '../../components/send-message.component/send-message.component';
 import { Message } from '../../../../models/message/message.model';
 import { MessageService } from '../../../../services/message.service';
 import { CreateMessage } from '../../../../models/message/create-message';
+import { SignalrService } from '../../../../services/signalr.service';
 
 @Component({
   selector: 'app-chat.page.component',
@@ -11,13 +12,15 @@ import { CreateMessage } from '../../../../models/message/create-message';
   templateUrl: './chat.page.component.html',
   styleUrl: './chat.page.component.scss',
 })
-export class ChatPageComponent implements OnInit {
+export class ChatPageComponent implements OnInit, OnDestroy {
   messages = signal<Message[]>([]);
 
-  constructor(private messageService: MessageService){}
+  constructor(private messageService: MessageService, private signalrService: SignalrService){}
 
   ngOnInit(){
     this.getAllMessages();
+    this.signalrService.startConnection();
+    this.signalrService.messages$.subscribe(msgs => this.messages.set(msgs));
   }
 
   getAllMessages(){
@@ -33,5 +36,9 @@ export class ChatPageComponent implements OnInit {
       next: response => console.log(response),
       error: error => console.error(error)
     });
+  }
+
+  ngOnDestroy() {
+    this.signalrService.stopConnection();
   }
 }

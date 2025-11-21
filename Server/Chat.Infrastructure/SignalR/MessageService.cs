@@ -13,7 +13,13 @@ namespace Chat.Infrastructure.SignalR
         }
         public async Task SendMessageToAllAsync(Message message)
         {
-            await _hubContext.Clients.All.SendAsync("ReceiveMessage", new { message });
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", new
+            {
+                message.Id,
+                message.Username,
+                message.Content,
+                message.Created
+            });
         }
     }
 }
