@@ -1,4 +1,4 @@
 export interface CreateMessage{
-    username: string;
+    userId: number;
     content: string;
 }
