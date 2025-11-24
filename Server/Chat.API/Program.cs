@@ -17,6 +17,7 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateMessageCommandHandler).Assembly));
 
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserCommandValidator>();
+builder.Services.AddTransient<IValidator<RegisterUserCommand>, RegisterUserCommandValidator>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -48,6 +49,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

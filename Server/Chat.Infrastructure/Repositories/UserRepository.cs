@@ -14,6 +14,9 @@ namespace Chat.Infrastructure.Repositories
         }
         public void Add(User user) => _context.Users.Add(user);
 
+        public Task<bool> Exists(string username) => _context.Users.AnyAsync(u => u.Username == username);
+
+
         public Task<User?> GetByUsernameAsync(string username) =>
             _context.Users.FirstOrDefaultAsync(u => u.Username == username);
     }

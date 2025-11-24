@@ -14,8 +14,8 @@ namespace Chat.Infrastructure.Repositories
         }
         public void Add(Message message) => _context.Messages.Add(message);
 
-        public Task<List<Message>> GetAllAsync() => _context.Messages.ToListAsync();
+        public Task<List<Message>> GetAllAsync() => _context.Messages.Include(m => m.User).ToListAsync();
 
-        public Task<Message?> GetByIdAsync(int id) => _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
+        public Task<Message?> GetByIdAsync(int id) => _context.Messages.Include(m => m.User).FirstOrDefaultAsync(m => m.Id == id);
     }
 }

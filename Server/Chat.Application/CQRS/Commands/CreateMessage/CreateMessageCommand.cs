@@ -2,5 +2,5 @@
 
 namespace Chat.Application.CQRS.Commands.CreateMessage
 {
-    public  record CreateMessageCommand(string Username, string Content) : IRequest<int>;
+    public  record CreateMessageCommand(int UserId, string Content) : IRequest<int>;
 }

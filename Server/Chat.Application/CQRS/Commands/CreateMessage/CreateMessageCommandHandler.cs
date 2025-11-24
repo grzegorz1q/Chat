@@ -19,7 +19,7 @@ namespace Chat.Application.CQRS.Commands.CreateMessage
         }
         public async Task<int> Handle(CreateMessageCommand request, CancellationToken cancellationToken)
         {
-            var message = new Message(request.Username, request.Content);
+            var message = new Message(request.UserId, request.Content);
             _messageRepository.Add(message);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
             await _messageService.SendMessageToAllAsync(message);

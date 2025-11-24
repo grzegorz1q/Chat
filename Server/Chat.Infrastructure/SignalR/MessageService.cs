@@ -16,7 +16,7 @@ namespace Chat.Infrastructure.SignalR
             await _hubContext.Clients.All.SendAsync("ReceiveMessage", new
             {
                 message.Id,
-                message.Username,
+                message.User.Username,
                 message.Content,
                 message.Created
             });

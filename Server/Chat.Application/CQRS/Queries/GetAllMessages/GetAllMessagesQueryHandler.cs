@@ -15,7 +15,7 @@ namespace Chat.Application.CQRS.Queries.GetAllMessages
         {
             var allMessages = await _messageRepository.GetAllAsync();
 
-            return allMessages.Select(m => new ReadMessageDto(m.Id, m.Username, m.Content, m.Created));
+            return allMessages.Select(m => new ReadMessageDto(m.Id, m.User.Username, m.Content, m.Created));
         }
     }
 }

@@ -7,8 +7,9 @@
         public DateTime Created { get; private set; }
         public int UserId {  get; private set; }
         public User User { get; private set; } = default!;
-        public Message(string content)
+        public Message(int userId, string content)
         {
+            UserId = userId;
             Content = content;
             Created = DateTime.Now;
         }

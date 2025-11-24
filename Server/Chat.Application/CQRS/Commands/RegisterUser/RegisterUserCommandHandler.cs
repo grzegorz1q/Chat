@@ -2,7 +2,6 @@
 using Chat.Domain.Entities;
 using Chat.Domain.Interfaces;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 
 namespace Chat.Application.CQRS.Commands.RegisterUser
 {
@@ -19,14 +18,17 @@ namespace Chat.Application.CQRS.Commands.RegisterUser
         }
         public async Task<int> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var existing = await _userRepository.GetByUsernameAsync(request.Username);
-            if (existing != null) throw new Exception("User already exists!");
+            if(await _userRepository.Exists(request.Username)) 
+                throw new Exception("User already exists!");
 
-            var passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(request.Password));
-            var user = new User(request.Username, Convert.ToBase64String(passwordHash));
+            if (request.Password != request.ConfirmPassword) //TODO: Move to FluentValidator (validator pipeline?)
+                throw new Exception("'Confirm password' must match 'password'");
+
+            var user = new User(request.Username, _hasher.Hash(request.Password));
 
             _userRepository.Add(user);
             await _unitOfWork.SaveChangesAsync();
+
             return user.Id;
         }
     }

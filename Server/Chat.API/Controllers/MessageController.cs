@@ -33,7 +33,7 @@ namespace Chat.API.Controllers
             try
             {
                 var id = await _mediator.Send(command);
-                return Ok(id);
+                return Ok( new { id });
             }
             catch(Exception ex)
             {
