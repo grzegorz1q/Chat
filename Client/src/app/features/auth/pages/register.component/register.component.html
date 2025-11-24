@@ -1,0 +1,24 @@
+<div class="register-form">
+    <h2>Rejestracja</h2>
+    <form (ngSubmit)="register()">
+        <label>Nazwa użytkownika</label>
+        <input type="text" [(ngModel)]="user.username" name="username" required/>
+
+        <label>Hasło</label>
+        <input type="password" [(ngModel)]="user.password" name="password" required/>
+
+        <label>Potwierdź hasło</label>
+        <input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" />
+
+        <button type="submit">Zarejestruj</button>
+    </form>
+    @if(isLoading){
+        <p>Ładowanie</p>
+    }
+    @if (message) {
+    <p class="success">{{ message }}</p>
+    }
+    @if (error) {
+    <p class="error">{{ error }}</p>
+    }
+</div>
