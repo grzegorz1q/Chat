@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Message } from '../../../../models/message/message.model';
 import { FormsModule } from '@angular/forms';
 import { CreateMessage } from '../../../../models/message/create-message';
+import { MatInputModule } from '@angular/material/input';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
   selector: 'app-send-message',
-  imports: [FormsModule],
+  imports: [FormsModule, MatInputModule, CdkTextareaAutosize],
   templateUrl: './send-message.component.html',
   styleUrl: './send-message.component.scss',
 })
@@ -20,7 +21,7 @@ export class SendMessageComponent {
   sendMessage(){
     this.messageSent.emit(this.message);
     this.message = {
-      username: '',
+      username: this.message.username,
       content: ''
     }
   }

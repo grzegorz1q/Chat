@@ -10,8 +10,8 @@ import { BehaviorSubject } from 'rxjs';
 export class SignalrService {
   private hubConnection!: signalR.HubConnection; //Nwm czy powinno być z "!"
 
-  private messagesSource = new BehaviorSubject<Message[]>([]); // Nie do końca rozumiem
-  messages$ = this.messagesSource.asObservable();              //
+  private messageSource = new BehaviorSubject<Message | null>(null); // Nie do końca rozumiem
+  message$ = this.messageSource.asObservable();              //
 
   private readonly apiUrl = `${environment.apiUrl}/messageHub`;
   constructor(){}
@@ -25,13 +25,12 @@ export class SignalrService {
         .start()
         .then(() => console.log("SignalR connection started"))
         .catch(error => console.error('Error establishing SignalR connection: ' + error));
-        this.addMessageListener();
+        // this.addMessageListener();
   }
 
   public addMessageListener = () => {
     this.hubConnection.on('ReceiveMessage', (message: Message) => {
-      const currentMessages = this.messagesSource.value;
-      this.messagesSource.next([...currentMessages, message]);
+      this.messageSource.next(message);
     })
   }
 

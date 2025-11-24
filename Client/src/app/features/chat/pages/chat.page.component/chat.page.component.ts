@@ -20,7 +20,12 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   ngOnInit(){
     this.getAllMessages();
     this.signalrService.startConnection();
-    this.signalrService.messages$.subscribe(msgs => this.messages.set(msgs));
+    this.signalrService.addMessageListener();
+    this.signalrService.message$.subscribe(newMessage => {
+      if(newMessage){
+        this.messages.update(old => [...old, newMessage]);
+      }
+    });
   }
 
   getAllMessages(){

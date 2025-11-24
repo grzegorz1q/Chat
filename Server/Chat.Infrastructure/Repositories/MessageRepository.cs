@@ -12,19 +12,10 @@ namespace Chat.Infrastructure.Repositories
         {
             _context = context;
         }
-        public void Add(Message message)
-        {
-            _context.Add(message);
-        }
+        public void Add(Message message) => _context.Messages.Add(message);
 
-        public Task<List<Message>> GetAllAsync()
-        {
-            return _context.Messages.ToListAsync();
-        }
+        public Task<List<Message>> GetAllAsync() => _context.Messages.ToListAsync();
 
-        public Task<Message?> GetByIdAsync(int id)
-        {
-            return _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
-        }
+        public Task<Message?> GetByIdAsync(int id) => _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
     }
 }

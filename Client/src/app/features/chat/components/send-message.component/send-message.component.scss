@@ -1,0 +1,41 @@
+.chat-form {
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  .input-row{
+    display: flex;
+    flex-direction: column;
+    input{
+      border-radius: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  .textarea-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    textarea {
+      flex: 1;
+      box-sizing: border-box;
+      border-radius: 8px;
+      min-height: 3rem;
+    }
+    button{
+      border: none;
+      margin-left: 0.5rem;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      align-self: flex-end;
+      img{
+        max-width: 20px;
+        max-height: 20px;
+      }
+    }
+    button:hover img{
+      filter: invert(40%) sepia(100%) saturate(500%) hue-rotate(200deg);
+    }
+  }
+}

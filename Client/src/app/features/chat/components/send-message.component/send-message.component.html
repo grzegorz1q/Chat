@@ -1,7 +1,16 @@
-<form (ngSubmit)="sendMessage()">
-    <label>Nazwa użytkownika</label>
-    <input type="text" name="userName" [(ngModel)]="message!.username" /><br>
+<form (ngSubmit)="sendMessage()" class="chat-form">
+    <div class="input-row">
+        <label>Nazwa użytkownika</label>
+        <input type="text" name="userName" [(ngModel)]="message!.username" /><br>
+    </div>
     <label>Wiadomość</label>
-    <input type="text" name="content" [(ngModel)]="message!.content" /><br>
-    <button type="submit">Wyślij</button>
+    <div class="textarea-row">
+        <textarea
+            matInput
+            cdkTextareaAutosize
+            name="content" 
+            [(ngModel)]="message!.content">
+        </textarea><br>
+        <button type="submit"><img src="assets/images/send-message.png" alt="Wyślij"/></button>
+    </div>
 </form>
