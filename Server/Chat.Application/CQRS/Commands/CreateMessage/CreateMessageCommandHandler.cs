@@ -22,7 +22,9 @@ namespace Chat.Application.CQRS.Commands.CreateMessage
             var message = new Message(request.UserId, request.Content);
             _messageRepository.Add(message);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
-            await _messageService.SendMessageToAllAsync(message);
+            var messageWithUser = await _messageRepository.GetByIdAsync(message.Id) ??
+                throw new KeyNotFoundException("Message not found");
+            await _messageService.SendMessageToAllAsync(messageWithUser);
             return message.Id;
         }
     }

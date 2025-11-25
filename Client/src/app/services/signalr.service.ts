@@ -25,7 +25,6 @@ export class SignalrService {
         .start()
         .then(() => console.log("SignalR connection started"))
         .catch(error => console.error('Error establishing SignalR connection: ' + error));
-        // this.addMessageListener();
   }
 
   public addMessageListener = () => {
