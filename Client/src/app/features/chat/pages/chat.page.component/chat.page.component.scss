@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 20%;
+  margin: auto;             /* automatyczne marginesy wycentrują w poziomie i pionie */
+  height: fit-content;      /* dopasowuje wysokość do zawartości */
+}

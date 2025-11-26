@@ -1,9 +1,10 @@
-<div class="chat-container">
-    @for (message of messages(); track $index) {
-        <div class="message">
+@for (message of messages(); track $index) {
+    <div [ngClass]="{'my-message': message.userId == userId, 'message': message.userId != userId}">
+        <div class="header">
             <span class="user">{{message.username}}:</span>
-            <span class="content">{{message.content}}</span>
-            <span class="date">{{message.date | date:'shortTime'}}</span>
+            <span class="date">{{message.created| date: 'hh:mm'}}</span>
         </div>
-    }
-</div>
+        <span class="content">{{message.content}}</span>
+    </div>
+}
+

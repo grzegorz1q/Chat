@@ -1,9 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CreateMessage } from '../../../../models/message/create-message';
 import { MatInputModule } from '@angular/material/input';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { JwtService } from '../../../../services/jwt.service';
 
 @Component({
   selector: 'app-send-message',
@@ -13,22 +12,21 @@ import { JwtService } from '../../../../services/jwt.service';
 })
 export class SendMessageComponent implements OnInit {
   message!: CreateMessage;
+  @Input() userId!: number; //not visible on UI, no need to be input<>()
 
-  @Output() messageSent = new EventEmitter<CreateMessage>();
-
-  constructor(private jwtService: JwtService){}
+  @Output() messageSent = new EventEmitter<CreateMessage>(); //not visible on UI, no need to be output<>()
 
   ngOnInit() {
-      this.message = {
-        userId: this.jwtService.getUserId(),
-        content: ''
-      };
+    this.message = {
+      userId: this.userId,
+      content: ''
+    };
   }
 
   sendMessage(){
     this.messageSent.emit(this.message);
     this.message = {
-      userId: this.jwtService.getUserId(),
+      userId: this.userId,
       content: ''
     }
   }

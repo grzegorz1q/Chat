@@ -5,6 +5,7 @@ import { Message } from '../../../../models/message/message.model';
 import { MessageService } from '../../../../services/message.service';
 import { CreateMessage } from '../../../../models/message/create-message';
 import { SignalrService } from '../../../../services/signalr.service';
+import { JwtService } from '../../../../services/jwt.service';
 
 @Component({
   selector: 'app-chat.page.component',
@@ -15,7 +16,10 @@ import { SignalrService } from '../../../../services/signalr.service';
 export class ChatPageComponent implements OnInit, OnDestroy {
   messages = signal<Message[]>([]);
 
-  constructor(private messageService: MessageService, private signalrService: SignalrService){}
+  constructor(
+    private messageService: MessageService, 
+    private signalrService: SignalrService, 
+    private jwtService: JwtService){}
 
   ngOnInit(){
     this.getAllMessages();
@@ -23,6 +27,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this.signalrService.addMessageListener();
     this.signalrService.message$.subscribe(newMessage => {
       if(newMessage){
+        console.log(newMessage);
         this.messages.update(old => [...old, newMessage]);
       }
     });
@@ -32,6 +37,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this.messageService.getAllMessages().subscribe({
       next: response => {
         this.messages.set(response);
+        console.log(this.messages());
       },
       error: error => console.error(error)
     });
@@ -42,7 +48,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
       error: error => console.error(error)
     });
   }
-
+  getUserId(): number{
+    return this.jwtService.getUserId();
+  }
   ngOnDestroy() {
     this.signalrService.stopConnection();
   }

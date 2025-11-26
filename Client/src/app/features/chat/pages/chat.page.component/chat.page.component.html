@@ -1,2 +1,4 @@
-<app-chat-container [messages]="messages()"></app-chat-container>
-<app-send-message (messageSent)="createMessage($event)"></app-send-message>
+<div class="container">
+    <app-chat-container [messages]="messages()" [userId]="getUserId()"></app-chat-container>
+    <app-send-message (messageSent)="createMessage($event)" [userId]="getUserId()"></app-send-message>
+</div>

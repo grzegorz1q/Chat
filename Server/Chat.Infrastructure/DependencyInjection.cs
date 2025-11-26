@@ -52,7 +52,6 @@ namespace Chat.Infrastructure
             services.AddScoped<IMessageService, MessageService>();
 
             
-
             return services;
         }
     }
