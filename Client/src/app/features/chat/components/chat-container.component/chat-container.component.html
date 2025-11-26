@@ -1,7 +1,7 @@
 @for (message of messages(); track $index) {
     <div [ngClass]="{'my-message': message.userId == userId, 'message': message.userId != userId}">
         <div class="header">
-            <span class="user">{{message.username}}:</span>
+            <span class="user">{{message.username}}</span>
             <span class="date">{{message.created| date: 'hh:mm'}}</span>
         </div>
         <span class="content">{{message.content}}</span>
